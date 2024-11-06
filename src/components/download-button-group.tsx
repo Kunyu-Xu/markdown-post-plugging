@@ -16,7 +16,7 @@ export const DownloadButtonGroup: React.FC<DownloadButtonGroupProps> = ({ fullWi
       position: "top-center",
     });
 
-    // TODO: 实现图片下载功能
+    // TODO: 实现下载功能
   };
 
   return (

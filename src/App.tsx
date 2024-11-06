@@ -3,6 +3,33 @@ import { MarkdownEditor } from './components/markdown-editor';
 import { Toolbar } from './components/toolbar';
 import { markdownStyles } from './config/post-styles';
 import { marked } from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
+
+const renderer = new marked.Renderer();
+const originalCodeRenderer = renderer.code.bind(renderer);
+
+renderer.code = (code: string, language: string | undefined, isEscaped: boolean) => {
+  if (language) {
+    try {
+      const highlightedCode = hljs.highlight(code, {
+        language,
+        ignoreIllegals: true
+      }).value;
+      return `<pre><code class="hljs language-${language}">${highlightedCode}</code></pre>`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return originalCodeRenderer(code, language, isEscaped);
+};
+
+marked.setOptions({
+  renderer: renderer,
+  gfm: true,
+  breaks: true,
+  pedantic: false
+});
 
 function App() {
   const [markdown, setMarkdown] = useState('');
@@ -12,8 +39,8 @@ function App() {
   React.useEffect(() => {
     const parseMarkdown = async () => {
       try {
-        const parsedHtml = await marked(markdown);
-        setHtml(parsedHtml);
+        const parsedHtml = marked.parse(markdown);
+        setHtml(String(parsedHtml));
       } catch (error) {
         console.error('Error parsing markdown:', error);
         setHtml('Error parsing markdown');
@@ -40,10 +67,9 @@ function App() {
             onChange={setMarkdown}
           />
         </div>
-        {/* 右侧预览 */}
-        <div 
+        <div
           id="markdown-body"
-          className="flex-1 border rounded-lg p-4 overflow-y-auto"
+          className="flex-1 border rounded-lg p-4 overflow-y-auto markdown-preview"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
@@ -51,4 +77,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

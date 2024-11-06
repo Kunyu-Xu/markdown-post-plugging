@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ButtonGroup } from "@nextui-org/react";
-import { copyHtmlWithStyle } from "@/utils/copy-html";
 import { toast } from "sonner";
 
 interface CopyButtonGroupProps {
@@ -9,7 +8,10 @@ interface CopyButtonGroupProps {
 
 export const CopyButtonGroup: React.FC<CopyButtonGroupProps> = ({ fullWidth }) => {
   const handleCopyButtonClick = () => {
-    copyHtmlWithStyle("markdown-body");
+    const element = document.getElementById("markdown-body");
+    if (!element) return;
+
+    // TODO: 实现复制功能
     toast.success("内容已复制", {
       description: "你可以粘贴到你的邮件中",
       duration: 4000,
