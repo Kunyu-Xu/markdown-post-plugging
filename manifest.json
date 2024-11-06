@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "MarkdownPost",
+  "version": "1.0.0",
+  "description": "将 Markdown 转换为多种格式的 Chrome 插件",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "clipboardWrite"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/favicon.png",
+      "48": "icons/favicon.png",
+      "128": "icons/favicon.png"
+    }
+  },
+  "icons": {
+    "16": "icons/favicon.png",
+    "48": "icons/favicon.png",
+    "128": "icons/favicon.png"
+  }
+} 
