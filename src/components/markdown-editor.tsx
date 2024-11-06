@@ -2,7 +2,7 @@ import { markdown } from "@codemirror/lang-markdown";
 import { EditorView } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
 import { basicSetup } from "codemirror";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface CodeEditorProps {
   value: string;
@@ -12,6 +12,11 @@ interface CodeEditorProps {
 const theme = EditorView.baseTheme({
   "&": {
     fontSize: "16px",
+    height: "100%"
+  },
+  ".cm-scroller": {
+    overflow: "auto",
+    height: "100%"
   },
   "&.cm-focused": {
     outline: "none",

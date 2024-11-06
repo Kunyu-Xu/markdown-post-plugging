@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean && npm run build:css && tsc && vite build",
-    "build:css": "tailwindcss -i ./src/index.css -o ./dist/output.css",
+    "build": "npm run clean && tsc && vite build && npm run build:css",
+    "build:css": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify",
     "preview": "vite preview",
     "clean": "rm -rf dist"
   },

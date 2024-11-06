@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+} 
