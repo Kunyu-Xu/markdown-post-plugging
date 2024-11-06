@@ -25,12 +25,14 @@ function App() {
 
   return (
     <div className="w-popup h-popup flex flex-col p-4">
-      <Toolbar 
-        selectedStyle={selectedStyle}
-        setSelectedStyle={setSelectedStyle}
-        markdownStyles={markdownStyles}
-      />
-      <div className="flex-1 flex gap-4 mt-4">
+      <div className="flex-none">
+        <Toolbar 
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+          markdownStyles={markdownStyles}
+        />
+      </div>
+      <div className="flex-1 flex gap-4 mt-4 min-h-0">
         {/* 左侧编辑器 */}
         <div className="flex-1 border rounded-lg overflow-hidden">
           <MarkdownEditor 
@@ -41,7 +43,7 @@ function App() {
         {/* 右侧预览 */}
         <div 
           id="markdown-body"
-          className="flex-1 border rounded-lg p-4 overflow-auto"
+          className="flex-1 border rounded-lg p-4 overflow-y-auto"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>

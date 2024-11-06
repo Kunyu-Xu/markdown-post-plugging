@@ -16,11 +16,33 @@ const theme = EditorView.baseTheme({
   },
   ".cm-scroller": {
     overflow: "auto",
-    height: "100%"
+    height: "100%",
+    "&::-webkit-scrollbar": {
+      width: "8px",
+      height: "8px"
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "#f1f1f1"
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "#888",
+      borderRadius: "4px"
+    },
+    "&::-webkit-scrollbar-thumb:hover": {
+      background: "#555"
+    }
+  },
+  ".cm-content": {
+    minHeight: "100%",
+    padding: "10px"
   },
   "&.cm-focused": {
-    outline: "none",
+    outline: "none"
   },
+  ".cm-line": {
+    padding: "0 4px",
+    lineHeight: "1.6"
+  }
 });
 
 export const MarkdownEditor: React.FC<CodeEditorProps> = ({ value, onChange }) => {
@@ -33,6 +55,7 @@ export const MarkdownEditor: React.FC<CodeEditorProps> = ({ value, onChange }) =
         basicSetup,
         markdown(),
         theme,
+        EditorView.lineWrapping,
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
             onChange(update.state.doc.toString());
@@ -53,5 +76,10 @@ export const MarkdownEditor: React.FC<CodeEditorProps> = ({ value, onChange }) =
     };
   }, []);
 
-  return <div id="editor-container" className="h-full w-full" />;
+  return (
+    <div 
+      id="editor-container" 
+      className="h-full w-full overflow-hidden"
+    />
+  );
 }; 
