@@ -9,11 +9,11 @@ export default {
   ],
   theme: {
     extend: {
-      width: {
-        'popup': '800px'
+      minWidth: {
+        'popup': '300px'
       },
-      height: {
-        'popup': '600px'
+      minHeight: {
+        'popup': '150px'
       }
     },
   },

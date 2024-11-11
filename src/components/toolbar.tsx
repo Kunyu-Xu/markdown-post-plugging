@@ -1,7 +1,5 @@
 import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";
-import { CopyButtonGroup } from "./copy-button-group";
-import { DownloadButtonGroup } from "./download-button-group";
 
 interface ToolbarProps {
   selectedStyle: string;
@@ -15,9 +13,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   markdownStyles,
 }) => {
   return (
-    <div className="flex gap-4 items-center mb-4">
+    <div className="w-[250px] h-[250px]">
       <Select
-        label="选择样式"
+        label="选择 Markdown 样式"
+        className="w-full"
+        disallowEmptySelection={true}
         selectedKeys={[selectedStyle]}
         onChange={(e) => setSelectedStyle(e.target.value)}
       >
@@ -27,8 +27,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           </SelectItem>
         ))}
       </Select>
-      <CopyButtonGroup />
-      <DownloadButtonGroup />
     </div>
   );
 }; 
