@@ -3,7 +3,7 @@ import { Select, SelectItem } from "@nextui-org/react";
 
 interface ToolbarProps {
   selectedStyle: string;
-  setSelectedStyle: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedStyle: (style: string) => void;
   markdownStyles: { name: string }[];
 }
 
@@ -13,13 +13,21 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   markdownStyles,
 }) => {
   return (
-    <div className="w-[250px] h-[250px]">
+    <div className="w-[250px]">
       <Select
         label="选择 Markdown 样式"
         className="w-full"
         disallowEmptySelection={true}
         selectedKeys={[selectedStyle]}
         onChange={(e) => setSelectedStyle(e.target.value)}
+        popoverProps={{
+          classNames: {
+            base: "!z-[9999]"
+          }
+        }}
+        listboxProps={{
+          className: "max-h-[200px] overflow-auto"
+        }}
       >
         {markdownStyles.map((style) => (
           <SelectItem key={style.name} value={style.name}>
