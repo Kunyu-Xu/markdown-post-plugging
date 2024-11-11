@@ -45,9 +45,19 @@ function App() {
             return;
           }
 
+          if (response?.error) {
+            console.error('Conversion error:', response.error);
+            alert('转换失败，请重试');
+            return;
+          }
+
           if (response?.html) {
             try {
-              await navigator.clipboard.writeText(response.html);
+              const clipboardItem = new ClipboardItem({
+                'text/html': new Blob([response.html], { type: 'text/html' })
+              });
+              
+              await navigator.clipboard.write([clipboardItem]);
               alert('已复制到剪贴板！');
             } catch (err) {
               console.error('Failed to copy to clipboard:', err);

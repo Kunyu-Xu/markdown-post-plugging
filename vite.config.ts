@@ -1,9 +1,30 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { copyFileSync, mkdirSync } from 'fs';
+
+// 复制样式文件到 dist
+function copyStyles() {
+  return {
+    name: 'copy-styles',
+    closeBundle() {
+      const stylesDir = path.resolve(__dirname, 'dist/styles');
+      mkdirSync(stylesDir, { recursive: true });
+      
+      // 复制所有样式文件
+      const styles = ['github', 'newspaper', 'poster', 'slim', 'note'];
+      styles.forEach(style => {
+        copyFileSync(
+          path.resolve(__dirname, `src/styles/${style}.css`),
+          path.resolve(__dirname, `dist/styles/${style}.css`)
+        );
+      });
+    }
+  };
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), copyStyles()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -12,19 +33,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    modulePreload: false,
+    cssCodeSplit: false,
     rollupOptions: {
       input: {
-        popup: path.resolve(__dirname, 'src/popup.tsx'),
-        'content-script': path.resolve(__dirname, 'src/content-script.ts'),
-        'background': path.resolve(__dirname, 'src/background.ts')
+        'popup': path.resolve(__dirname, 'src/popup.tsx'),
+        'content-script': path.resolve(__dirname, 'src/content-script.ts')
       },
       output: {
-        entryFileNames: (chunkInfo) => {
-          if (chunkInfo.name === 'popup') {
-            return 'popup.js';
-          }
-          return '[name].js';
-        },
+        entryFileNames: '[name].js',
         chunkFileNames: '[name].[hash].js',
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') {
@@ -32,11 +49,14 @@ export default defineConfig({
           }
           return '[name][extname]';
         },
+        manualChunks: undefined
       }
-    },
-    modulePreload: false,
-    cssCodeSplit: false,
-    minify: false,
-    sourcemap: true,
+    }
   },
+  css: {
+    modules: {
+      scopeBehaviour: 'local',
+      localsConvention: 'camelCase'
+    }
+  }
 }); 
