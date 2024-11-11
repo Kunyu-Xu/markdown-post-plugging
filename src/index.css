@@ -15,23 +15,34 @@ html, body, #root {
   position: relative;
 }
 
+/* 下拉菜单样式 */
+[role="listbox"] {
+  position: fixed !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
 /* 自定义滚动条样式 */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: #d1d5db;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #9ca3af;
 }
 
 /* Markdown 预览区域样式 */
@@ -75,10 +86,3 @@ html, body, #root {
   border-radius: 6px;
   font-size: 85%;
 }
-
-/* 下拉菜单样式 */
-[role="listbox"] {
-  position: fixed !important;
-  max-height: 300px !important;
-  overflow-y: auto !important;
-} 
