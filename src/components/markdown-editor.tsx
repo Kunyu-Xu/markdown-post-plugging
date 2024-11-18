@@ -12,40 +12,43 @@ interface CodeEditorProps {
 const theme = EditorView.baseTheme({
   "&": {
     fontSize: "16px",
-    height: "100%"
+    height: "100%",
   },
   ".cm-scroller": {
     overflow: "auto",
     height: "100%",
     "&::-webkit-scrollbar": {
       width: "8px",
-      height: "8px"
+      height: "8px",
     },
     "&::-webkit-scrollbar-track": {
-      background: "#f1f1f1"
+      background: "#f1f1f1",
     },
     "&::-webkit-scrollbar-thumb": {
       background: "#888",
-      borderRadius: "4px"
+      borderRadius: "4px",
     },
     "&::-webkit-scrollbar-thumb:hover": {
-      background: "#555"
-    }
+      background: "#555",
+    },
   },
   ".cm-content": {
     minHeight: "100%",
-    padding: "10px"
+    padding: "10px",
   },
   "&.cm-focused": {
-    outline: "none"
+    outline: "none",
   },
   ".cm-line": {
     padding: "0 4px",
-    lineHeight: "1.6"
-  }
+    lineHeight: "1.6",
+  },
 });
 
-export const MarkdownEditor: React.FC<CodeEditorProps> = ({ value, onChange }) => {
+export const MarkdownEditor: React.FC<CodeEditorProps> = ({
+  value,
+  onChange,
+}) => {
   const editor = useRef<EditorView>();
 
   useEffect(() => {
@@ -77,9 +80,6 @@ export const MarkdownEditor: React.FC<CodeEditorProps> = ({ value, onChange }) =
   }, []);
 
   return (
-    <div 
-      id="editor-container" 
-      className="h-full w-full overflow-hidden"
-    />
+    <div className="h-full w-full overflow-hidden" id="editor-container" />
   );
-}; 
+};

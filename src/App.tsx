@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Toolbar } from './components/toolbar';
-import { markdownStyles } from './config/post-styles';
-import { storage } from './utils/storage';
+import React, { useState, useEffect } from "react";
 import { Card } from "@nextui-org/react";
+
+import { Toolbar } from "./components/toolbar";
+import { markdownStyles } from "./config/post-styles";
+import { storage } from "./utils/storage";
 
 function App() {
   const [selectedStyle, setSelectedStyle] = useState(markdownStyles[0].name);
@@ -10,10 +11,12 @@ function App() {
   useEffect(() => {
     const loadSavedStyle = async () => {
       const savedStyle = await storage.getSelectedStyle();
+
       if (savedStyle) {
         setSelectedStyle(savedStyle);
       }
     };
+
     loadSavedStyle();
   }, []);
 
@@ -24,60 +27,69 @@ function App() {
 
   const handleConvert = async () => {
     try {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+
       if (!tab.id) return;
 
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ['content-script.js']
+        files: ["content-script.js"],
       });
 
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       chrome.tabs.sendMessage(
         tab.id,
         {
-          action: 'convertMarkdown',
-          styleName: selectedStyle
+          action: "convertMarkdown",
+          styleName: selectedStyle,
         },
         async (response) => {
           if (chrome.runtime.lastError) {
-            console.error('Error:', chrome.runtime.lastError);
+            console.error("Error:", chrome.runtime.lastError);
+
             return;
           }
 
           if (response?.error) {
-            console.error('Conversion error:', response.error);
-            alert('转换失败，请重试');
+            console.error("Conversion error:", response.error);
+            alert("转换失败，请重试");
+
             return;
           }
 
           if (response?.html) {
             try {
               const clipboardItem = new ClipboardItem({
-                'text/html': new Blob([response.html], { type: 'text/html' })
+                "text/html": new Blob([response.html], { type: "text/html" }),
               });
-              
+
               await navigator.clipboard.write([clipboardItem]);
-              alert('已复制到剪贴板！');
+              alert("已复制到剪贴板！");
             } catch (err) {
-              console.error('Failed to copy to clipboard:', err);
-              alert('复制失败，请重试');
+              console.error("Failed to copy to clipboard:", err);
+              alert("复制失败，请重试");
             }
           }
-        }
+        },
       );
     } catch (error) {
-      console.error('Error in handleConvert:', error);
+      console.error("Error in handleConvert:", error);
     }
   };
 
   return (
-    <Card className="popup-card relative" style={{width:'400px', height:"200px"}}>
-      <Toolbar 
+    <Card
+      className="popup-card relative"
+      style={{ width: "250px" }}
+    >
+      <Toolbar
+        markdownStyles={markdownStyles}
         selectedStyle={selectedStyle}
         setSelectedStyle={handleStyleChange}
-        markdownStyles={markdownStyles}
         onConvert={handleConvert}
       />
     </Card>
