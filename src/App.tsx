@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Toolbar } from './components/toolbar';
 import { markdownStyles } from './config/post-styles';
 import { storage } from './utils/storage';
+import { Card } from "@nextui-org/react";
 
 function App() {
   const [selectedStyle, setSelectedStyle] = useState(markdownStyles[0].name);
@@ -72,14 +73,14 @@ function App() {
   };
 
   return (
-    <div className="w-fit h-fit relative p-3 bg-gradient-to-br from-white to-gray-50 rounded-xl">
+    <Card className="popup-card relative" style={{width:'400px', height:"200px"}}>
       <Toolbar 
         selectedStyle={selectedStyle}
         setSelectedStyle={handleStyleChange}
         markdownStyles={markdownStyles}
         onConvert={handleConvert}
       />
-    </div>
+    </Card>
   );
 }
 
