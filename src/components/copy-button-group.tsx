@@ -6,9 +6,12 @@ interface CopyButtonGroupProps {
   fullWidth?: boolean;
 }
 
-export const CopyButtonGroup: React.FC<CopyButtonGroupProps> = ({ fullWidth }) => {
+export const CopyButtonGroup: React.FC<CopyButtonGroupProps> = ({
+  fullWidth,
+}) => {
   const handleCopyButtonClick = () => {
     const element = document.getElementById("markdown-body");
+
     if (!element) return;
 
     // TODO: 实现复制功能
@@ -29,4 +32,4 @@ export const CopyButtonGroup: React.FC<CopyButtonGroupProps> = ({ fullWidth }) =
       </Button>
     </ButtonGroup>
   );
-}; 
+};

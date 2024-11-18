@@ -4,28 +4,29 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run clean && tsc && vite build && npm run build:css",
+    "lint": "eslint -c .eslintrc.json ./src/**/**/*.{ts,tsx} --fix",
     "build:css": "tailwindcss -i ./src/index.css -o ./dist/output.css --minify",
     "preview": "vite preview",
     "clean": "rm -rf dist"
   },
   "dependencies": {
     "@codemirror/lang-markdown": "^6.3.0",
-    "@codemirror/state": "^6.4.1", 
+    "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.34.1",
     "@nextui-org/react": "^2.2.9",
     "@nextui-org/system": "^2.0.15",
     "@nextui-org/theme": "^2.1.18",
-    "codemirror": "^6.0.1",
-    "marked": "^11.1.1",
     "@types/marked": "^5.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "codemirror": "^6.0.1",
+    "framer-motion": "^11.0.8",
+    "highlight.js": "^11.9.0",
     "html-to-image": "^1.11.11",
     "i18next": "^23.16.4",
+    "marked": "^11.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-i18next": "^15.1.0",
-    "sonner": "^1.4.3",
-    "framer-motion": "^11.0.8",
-    "highlight.js": "^11.9.0"
+    "sonner": "^1.4.3"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.260",
@@ -37,6 +38,18 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.2",
-    "vite": "^5.1.5"
+    "vite": "^5.1.5",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "8.11.0",
+    "@typescript-eslint/parser": "8.11.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-unused-imports": "4.1.4",
+    "prettier": "3.3.3"
   }
 }

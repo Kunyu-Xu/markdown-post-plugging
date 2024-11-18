@@ -6,9 +6,12 @@ interface DownloadButtonGroupProps {
   fullWidth?: boolean;
 }
 
-export const DownloadButtonGroup: React.FC<DownloadButtonGroupProps> = ({ fullWidth }) => {
+export const DownloadButtonGroup: React.FC<DownloadButtonGroupProps> = ({
+  fullWidth,
+}) => {
   const handleDownloadButtonClick = async () => {
     const element = document.getElementById("markdown-body");
+
     if (!element) return;
 
     toast.success("处理中，请稍等...", {
@@ -29,4 +32,4 @@ export const DownloadButtonGroup: React.FC<DownloadButtonGroupProps> = ({ fullWi
       </Button>
     </ButtonGroup>
   );
-}; 
+};

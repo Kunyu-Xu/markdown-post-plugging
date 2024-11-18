@@ -1,8 +1,8 @@
-import githubStyle from '../styles/github.css?inline';
-import newspaperStyle from '../styles/newspaper.css?inline';
-import posterStyle from '../styles/poster.css?inline';
-import slimStyle from '../styles/slim.css?inline';
-import noteStyle from '../styles/note.css?inline';
+import githubStyle from "../styles/github.css?inline";
+import newspaperStyle from "../styles/newspaper.css?inline";
+import posterStyle from "../styles/poster.css?inline";
+import slimStyle from "../styles/slim.css?inline";
+import noteStyle from "../styles/note.css?inline";
 
 export const markdownStyles = [
   { name: "github", css: githubStyle },
